@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { ITodo } from '../../shared/models/todo.interface';
+import { INewTodo } from '../../shared/models/new-todo.interface';
 
 export enum ETodoActions {
   GetTodos = '[Todo] Get Todos',
@@ -8,6 +9,8 @@ export enum ETodoActions {
   ToggleTodoStateSuccess = '[Todo] Toggle Todo state Success',
   GetTodo = '[Todo] Get single Todo',
   GetTodoSuccess = '[Todo] Get single Todo Success',
+  AddTodo = '[Todo] Add Todo',
+  AddTodoSuccess = '[Todo] Add Todo Success',
 }
 
 export class GetTodos implements Action {
@@ -44,10 +47,24 @@ export class GetTodoSuccess implements Action {
   constructor(public payload: ITodo) {}
 }
 
+export class AddTodo implements Action {
+  public readonly type = ETodoActions.AddTodo;
+
+  constructor(public payload: INewTodo) {}
+}
+
+export class AddTodoSuccess implements Action {
+  public readonly type = ETodoActions.AddTodoSuccess;
+
+  constructor(public payload: ITodo) {}
+}
+
 export type TodoActions =
   | GetTodos
   | GetTodosSuccess
   | ToggleTodoState
   | ToggleTodoStateSuccess
   | GetTodo
-  | GetTodoSuccess;
+  | GetTodoSuccess
+  | AddTodo
+  | AddTodoSuccess;

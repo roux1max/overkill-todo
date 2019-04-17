@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 
 import { IAppState } from '../../store/states/app.state';
 import { selectTodosList } from '../../store/selectors/todo.selector';
-import { GetTodos, ToggleTodoState } from '../../store/actions/todo.action';
+import { GetTodos, ToggleTodoState, AddTodo } from '../../store/actions/todo.action';
+import { INewTodo } from '../../shared/models/new-todo.interface';
 
 @Component({
   templateUrl: './todos.component.html',
@@ -25,5 +26,9 @@ export class TodosComponent implements OnInit {
 
   navigateToTodo(id: number) {
     this._router.navigate(['tasks', id]);
+  }
+
+  addTodo(newTodo: INewTodo) {
+    this._store.dispatch(new AddTodo(newTodo));
   }
 }

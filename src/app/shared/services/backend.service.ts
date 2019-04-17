@@ -80,6 +80,19 @@ export class BackendService extends HttpXhrBackend {
             const selectedTodo = todos.find(todo => todo.id === id);
 
             return of(new HttpResponse<any>({ status: 200, body: { todo: selectedTodo } }));
+          } else if (request.url.endsWith('/todos') && request.method === 'POST') {
+            const newTodo = {
+              ...request.body,
+              id: todos.length + 1,
+              createdAt: new Date(),
+              done: false,
+              doneAt: null,
+            };
+
+            todos.push(newTodo);
+            localStorage.setItem(BackendService.storageKey, JSON.stringify(todos));
+
+            return of(new HttpResponse<any>({ status: 200, body: { todo: newTodo } }));
           }
 
           return throwError({ error: { message: 'Not found' } });

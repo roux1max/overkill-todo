@@ -13,6 +13,8 @@ import {
   MatCheckboxModule,
   MatToolbarModule,
   MatButtonModule,
+  MatInputModule,
+  MatDialogModule,
 } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
@@ -26,6 +28,7 @@ import { TodosComponent } from './containers/todos/todos.component';
 import { TodosListComponent } from './components/todos-list/todos-list.component';
 import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
 import { SingleTodoComponent } from './containers/single-todo/single-todo.component';
+import { AddTodoModalComponent } from './components/add-todo-modal/add-todo-modal.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import { SingleTodoComponent } from './containers/single-todo/single-todo.compon
     TodosListComponent,
     TodoDetailComponent,
     SingleTodoComponent,
+    AddTodoModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,8 @@ import { SingleTodoComponent } from './containers/single-todo/single-todo.compon
     MatCheckboxModule,
     MatToolbarModule,
     MatButtonModule,
+    MatInputModule,
+    MatDialogModule,
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([TodoEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
@@ -54,5 +60,6 @@ import { SingleTodoComponent } from './containers/single-todo/single-todo.compon
   ],
   providers: [BackendService, TodoService],
   bootstrap: [AppComponent],
+  entryComponents: [AddTodoModalComponent],
 })
 export class AppModule {}
