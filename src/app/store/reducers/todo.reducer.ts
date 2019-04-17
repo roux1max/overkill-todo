@@ -20,6 +20,12 @@ export const todoReducers = (state = initialTodoState, action: TodoActions): ITo
         ),
       };
     }
+    case ETodoActions.GetTodoSuccess: {
+      return {
+        ...state,
+        selectedTodo: action.payload,
+      };
+    }
     default:
       return state;
   }

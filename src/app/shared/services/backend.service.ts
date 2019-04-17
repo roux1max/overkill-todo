@@ -23,7 +23,8 @@ export class BackendService extends HttpXhrBackend {
           {
             id: 1,
             title: 'My first Todo!',
-            description: 'lorem ipsum dolor es...',
+            description:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed fringilla justo, vel blandit ipsum. Maecenas et nibh id ipsum venenatis dapibus vitae nec libero. Pellentesque fermentum vel elit eu rutrum. In ultrices tempus porttitor. Ut vestibulum, dolor sed facilisis congue, tellus eros ultrices quam, quis lobortis ligula arcu sed ante.',
             createdAt: new Date('2019-16-04T10:15:00'),
             doneAt: null,
             done: false,
@@ -31,7 +32,8 @@ export class BackendService extends HttpXhrBackend {
           {
             id: 2,
             title: 'Another task I must do',
-            description: 'lorem ipsum dolor es...',
+            description:
+              'Sed porta pretium pellentesque. Morbi id convallis ligula, vel cursus tortor. Maecenas odio libero, molestie ut iaculis pellentesque, lobortis nec nisl. Sed justo metus, varius eget tincidunt vel, convallis vel neque. Curabitur nec tincidunt nibh. Suspendisse feugiat est id mollis malesuada. Ut eu arcu fringilla, venenatis velit tempor, dignissim arcu. Integer vel neque bibendum, facilisis risus eu, tincidunt purus. Donec nisi mi, fermentum vitae augue et, faucibus rhoncus eros. Vestibulum hendrerit ex ac tristique aliquam.',
             createdAt: new Date('2019-16-04T12:30:00'),
             doneAt: null,
             done: false,
@@ -39,7 +41,8 @@ export class BackendService extends HttpXhrBackend {
           {
             id: 3,
             title: 'This one I already did it!',
-            description: 'lorem ipsum dolor es...',
+            description:
+              'Proin lacinia ultrices nisl vel ullamcorper. Cras sit amet metus urna. Morbi non elit commodo, pulvinar dui in, semper diam. Ut est turpis, scelerisque cursus felis sed, bibendum eleifend nulla. Praesent viverra aliquet ipsum, et suscipit tellus eleifend id. Vestibulum sed bibendum lectus. Donec nisl justo, commodo a convallis eget, mattis id libero.',
             createdAt: new Date('2019-15-04T10:00:00'),
             doneAt: new Date('2019-17-04T09:00:00'),
             done: true,
@@ -56,6 +59,7 @@ export class BackendService extends HttpXhrBackend {
     return of(null)
       .pipe(
         mergeMap(() => {
+          let matches = null;
           if (request.url.endsWith('/todos') && request.method === 'GET') {
             return of(new HttpResponse<ITodoHttp>({ status: 200, body: { todos } }));
           } else if (request.url.endsWith('/todos/toggle-state') && request.method === 'PATCH') {
@@ -68,6 +72,14 @@ export class BackendService extends HttpXhrBackend {
 
               return of(new HttpResponse<any>({ status: 200, body: { todo: todos[index] } }));
             }
+          } else if (
+            (matches = request.url.match(/\/todos\/([0-9]{1,})$/)) &&
+            request.method === 'GET'
+          ) {
+            const id = parseInt(matches[1]);
+            const selectedTodo = todos.find(todo => todo.id === id);
+
+            return of(new HttpResponse<any>({ status: 200, body: { todo: selectedTodo } }));
           }
 
           return throwError({ error: { message: 'Not found' } });

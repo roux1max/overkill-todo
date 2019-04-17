@@ -1,5 +1,10 @@
-<h1>
-  Welcome to {{ title }}!
-</h1>
+<mat-toolbar [color]="'primary'">
+  <button mat-button (click)="goToHome()">Overkill Todo</button>
+</mat-toolbar>
+<div class="overkill-todo">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>

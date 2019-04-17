@@ -12,6 +12,8 @@ export class TodosListComponent implements OnChanges {
   todos: ITodo[];
   @Output()
   todoStateToggled: EventEmitter<number> = new EventEmitter();
+  @Output()
+  todoClicked: EventEmitter<number> = new EventEmitter();
 
   sortedTodos: ITodo[] = [];
 
@@ -19,7 +21,6 @@ export class TodosListComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.todos && changes.todos.currentValue) {
-      console.log(this.todos);
       this.refreshSortedTodos();
     }
   }
@@ -38,6 +39,10 @@ export class TodosListComponent implements OnChanges {
         return new Date(todo1.createdAt).getTime() - new Date(todo2.createdAt).getTime();
       }
     });
+  }
+
+  openTodo(todo: ITodo) {
+    this.todoClicked.emit(todo.id);
   }
 
   addNewTask() {}

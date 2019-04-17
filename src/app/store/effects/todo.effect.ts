@@ -12,6 +12,8 @@ import {
   ETodoActions,
   ToggleTodoState,
   ToggleTodoStateSuccess,
+  GetTodo,
+  GetTodoSuccess,
 } from '../actions/todo.action';
 import { TodoService } from '../../shared/services/todo.service';
 import { ITodoHttp } from '../../shared/models/todo-http.interface';
@@ -33,6 +35,16 @@ export class TodoEffects {
     switchMap(id => this._todoService.toggleTodoState(id)),
     switchMap((response: HttpResponse<ISingleTodoHttp>) =>
       of(new ToggleTodoStateSuccess(response.body.todo))
+    )
+  );
+
+  @Effect()
+  getTodo$ = this._actions$.pipe(
+    ofType<GetTodo>(ETodoActions.GetTodo),
+    map(action => action.payload),
+    switchMap(id => this._todoService.getSingleTodo(id)),
+    switchMap((response: HttpResponse<ISingleTodoHttp>) =>
+      of(new GetTodoSuccess(response.body.todo))
     )
   );
 

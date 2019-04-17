@@ -6,7 +6,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { HttpClientModule } from '@angular/common/http';
-import { MatListModule, MatCardModule, MatIconModule, MatCheckboxModule } from '@angular/material';
+import {
+  MatListModule,
+  MatCardModule,
+  MatIconModule,
+  MatCheckboxModule,
+  MatToolbarModule,
+  MatButtonModule,
+} from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,9 +24,17 @@ import { BackendService } from './shared/services/backend.service';
 import { TodoService } from './shared/services/todo.service';
 import { TodosComponent } from './containers/todos/todos.component';
 import { TodosListComponent } from './components/todos-list/todos-list.component';
+import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
+import { SingleTodoComponent } from './containers/single-todo/single-todo.component';
 
 @NgModule({
-  declarations: [AppComponent, TodosComponent, TodosListComponent],
+  declarations: [
+    AppComponent,
+    TodosComponent,
+    TodosListComponent,
+    TodoDetailComponent,
+    SingleTodoComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -29,6 +44,8 @@ import { TodosListComponent } from './components/todos-list/todos-list.component
     MatCardModule,
     MatIconModule,
     MatCheckboxModule,
+    MatToolbarModule,
+    MatButtonModule,
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([TodoEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),

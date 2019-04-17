@@ -21,4 +21,9 @@ export class TodoService {
     const req = new HttpRequest('PATCH', `${this.todosUrl}/toggle-state`, { id });
     return this._backendService.handle(req);
   }
+
+  getSingleTodo(id: number): Observable<HttpResponse<ISingleTodoHttp>> {
+    const req = new HttpRequest<ITodoHttp>('GET', `${this.todosUrl}/${id}`);
+    return this._backendService.handle(req);
+  }
 }

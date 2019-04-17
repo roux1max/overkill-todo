@@ -6,6 +6,8 @@ export enum ETodoActions {
   GetTodosSuccess = '[Todo] Get Todos Success',
   ToggleTodoState = '[Todo] Toggle Todo state',
   ToggleTodoStateSuccess = '[Todo] Toggle Todo state Success',
+  GetTodo = '[Todo] Get single Todo',
+  GetTodoSuccess = '[Todo] Get single Todo Success',
 }
 
 export class GetTodos implements Action {
@@ -30,4 +32,22 @@ export class ToggleTodoStateSuccess implements Action {
   constructor(public payload: ITodo) {}
 }
 
-export type TodoActions = GetTodos | GetTodosSuccess | ToggleTodoState | ToggleTodoStateSuccess;
+export class GetTodo implements Action {
+  public readonly type = ETodoActions.GetTodo;
+
+  constructor(public payload: number) {}
+}
+
+export class GetTodoSuccess implements Action {
+  public readonly type = ETodoActions.GetTodoSuccess;
+
+  constructor(public payload: ITodo) {}
+}
+
+export type TodoActions =
+  | GetTodos
+  | GetTodosSuccess
+  | ToggleTodoState
+  | ToggleTodoStateSuccess
+  | GetTodo
+  | GetTodoSuccess;

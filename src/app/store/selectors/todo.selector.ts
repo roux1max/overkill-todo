@@ -9,3 +9,8 @@ export const selectTodosList = createSelector(
   selectTodos,
   (state: ITodoState) => state.todos
 );
+
+export const selectSelectedTodo = createSelector(
+  selectTodos,
+  (state: ITodoState) => state.selectedTodo
+);
