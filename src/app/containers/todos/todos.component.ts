@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 
 import { IAppState } from '../../store/states/app.state';
 import { selectTodosList } from '../../store/selectors/todo.selector';
-import { GetTodos } from '../../store/actions/todo.action';
+import { GetTodos, ToggleTodoState } from '../../store/actions/todo.action';
 
 @Component({
   templateUrl: './todos.component.html',
@@ -16,5 +16,9 @@ export class TodosComponent implements OnInit {
 
   ngOnInit() {
     this._store.dispatch(new GetTodos());
+  }
+
+  updateTodoState(id: number) {
+    this._store.dispatch(new ToggleTodoState(id));
   }
 }
